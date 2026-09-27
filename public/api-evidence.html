@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open Library API evidence</title>
+    <style>
+      body { margin: 0; padding: 32px; background: #f8f5ef; color: #332c27; font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+      main { max-width: 980px; margin: 0 auto; }
+      h1 { font: 600 32px/1.1 Georgia, serif; margin: 0 0 8px; }
+      p { color: #756960; font-family: ui-sans-serif, system-ui, sans-serif; }
+      .endpoint { padding: 12px 14px; background: #fffdf9; border: 1px solid #e3dbd0; border-radius: 10px; color: #bb654f; }
+      pre { overflow: auto; padding: 20px; background: #2f2925; color: #f8efe3; border-radius: 12px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Phase 1 API evidence</h1>
+      <p>This response is loaded from Open Library and is used by ShelfLife for book search.</p>
+      <div class="endpoint">GET https://openlibrary.org/search.json?title=javascript&amp;limit=3</div>
+      <pre id="response">Loading response…</pre>
+    </main>
+    <script>
+      fetch('https://openlibrary.org/search.json?title=javascript&limit=3')
+        .then((response) => response.json())
+        .then((data) => {
+          const compact = { numFound: data.numFound, docs: data.docs.map((book) => ({ title: book.title, author_name: book.author_name, first_publish_year: book.first_publish_year, cover_i: book.cover_i, key: book.key })) };
+          document.querySelector('#response').textContent = JSON.stringify(compact, null, 2);
+        })
+        .catch((error) => { document.querySelector('#response').textContent = `Request failed: ${error.message}`; });
+    </script>
+  </body>
+</html>
