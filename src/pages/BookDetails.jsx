@@ -43,6 +43,9 @@ function BookDetails() {
         setBook((current) => ({
           ...current,
           title: data.title || current.title,
+          // Arriving by a typed or refreshed URL means no book came with
+          // us in router state, so take the cover from the work record.
+          coverId: current.coverId ?? data.covers?.[0] ?? null,
           subjects: data.subjects?.slice(0, 8) || current.subjects,
         }));
         setDescription(
