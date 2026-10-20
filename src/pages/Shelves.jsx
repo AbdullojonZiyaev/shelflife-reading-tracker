@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import BookCard from '../components/BookCard.jsx';
+import BookGrid from '../components/BookGrid.jsx';
 import StateMessage from '../components/StateMessage.jsx';
 import { shelfNames, useShelves } from '../context/ShelfContext.jsx';
 
@@ -39,11 +39,7 @@ function Shelves() {
           text="Search for a book and add it here when you are ready."
         />
       ) : (
-        <div className="book-grid">
-          {books.map((book) => (
-            <BookCard key={book.id} book={book} />
-          ))}
-        </div>
+        <BookGrid books={books} />
       )}
     </section>
   );

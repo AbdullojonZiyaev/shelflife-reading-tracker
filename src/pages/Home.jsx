@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import BookCard from '../components/BookCard.jsx';
+import BookGrid from '../components/BookGrid.jsx';
 import StateMessage from '../components/StateMessage.jsx';
 import { searchBooks } from '../services/openLibrary.js';
 
@@ -98,13 +98,7 @@ function Home() {
         />
       )}
 
-      {status === 'success' && books.length > 0 && (
-        <div className="book-grid">
-          {books.map((book) => (
-            <BookCard key={book.id} book={book} />
-          ))}
-        </div>
-      )}
+      {status === 'success' && books.length > 0 && <BookGrid books={books} />}
     </>
   );
 }
