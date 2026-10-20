@@ -85,9 +85,12 @@ function BookDetails() {
         <div className="details-copy">
           <div className="eyebrow">Book details</div>
           <h1>{book.title}</h1>
-          <p className="detail-author">
-            {book.authors?.join(', ') || 'Open Library author record'}
-          </p>
+          {/* Only shown when we actually have author names. Arriving by a
+              typed URL does not give us any, because the work record
+              returns author keys rather than names. */}
+          {book.authors?.length > 0 && (
+            <p className="detail-author">{book.authors.join(', ')}</p>
+          )}
 
           <div className="detail-meta">
             <span>{book.year}</span>
